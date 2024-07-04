@@ -108,7 +108,8 @@ public class EflyModule extends ToggleableModule {
                 // begin rubberband timer
                 lastPosition = mc.player.position();
                 timeOfLastRubberband = System.currentTimeMillis();
-            } else if (lastPosition.distanceTo(mc.player.position()) < RubberbandThreshold.getValue() && System.currentTimeMillis() - timeOfLastRubberband >= RubberbandTime.getValue() * 1000) {
+            } else if (lastPosition.distanceTo(mc.player.position()) < RubberbandThreshold.getValue()) {
+                if (System.currentTimeMillis() - timeOfLastRubberband < RubberbandTime.getValue() * 1000) return;
                 // has not moved in last cooldown, recover from rubberband
                 elytraFly.setToggled(false);
                 usingFirework = false;
